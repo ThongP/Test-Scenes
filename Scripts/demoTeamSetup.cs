@@ -7,12 +7,12 @@ using UnityEngine.UI;
  
 namespace Game
 {
-    public class Demo : MonoBehaviour
+    public class demoTeamSetup : MonoBehaviour
     {
-        [SerializeField] demoFigure _birdFigure;
+        [SerializeField] demoFigure _birdFigure1;
+        [SerializeField] demoFigure _birdFigure2;
 
         bool _isPlaying = false;
-        //bool _isFetchingGenes = false;
 
         // Start is called before the first frame update
         void Start()
@@ -21,9 +21,8 @@ namespace Game
 
             Mixer.Init();
 
-            string axieId = PlayerPrefs.GetString("selectingId", "4191804");
-            string genes = PlayerPrefs.GetString("selectingGenes", "0x2000000000000300008100e08308000000010010088081040001000010a043020000009008004106000100100860c40200010000084081060001001410a04406");
-            _birdFigure.SetGenes(axieId, genes);
+            StartCoroutine(GetAxiesGenes("4191804", _birdFigure1));
+            StartCoroutine(GetAxiesGenes("2724598", _birdFigure2));
         }
 
         // Update is called once per frame
@@ -31,18 +30,14 @@ namespace Game
         {
             if (!_isPlaying)
             {
-                if(Input.GetKeyDown(KeyCode.Space))
-                {
                     _isPlaying = true;
                     Time.timeScale = 1f;
-                }
             }
-
             
         }
 
         //Get model
-        public IEnumerator GetAxiesGenes(string axieId)
+        public IEnumerator GetAxiesGenes(string axieId, demoFigure _birdFigure)
         {
             string searchString = "{ axie (axieId: \"" + axieId + "\") { id, genes, newGenes}}";
             JObject jPayload = new JObject();
@@ -67,7 +62,6 @@ namespace Game
                     _birdFigure.SetGenes(axieId, genesStr);
                 }
             }
-            //_isFetchingGenes = false;
         }
     }
 }

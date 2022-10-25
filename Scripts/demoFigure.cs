@@ -61,13 +61,13 @@ namespace Game
 
         public void DoJumpAnim()
         {
-            skeletonAnimation.timeScale = 1f;
+            skeletonAnimation.timeScale = 0.5f;
             skeletonAnimation.AnimationState.AddAnimation(1, "action/move-forward", false, 0f);
         }
 
         public void DoAtkAnim()
         {
-            skeletonAnimation.timeScale = 1f;
+            skeletonAnimation.timeScale = 0.5f;
             skeletonAnimation.AnimationState.AddAnimation(1, "attack/melee/mouth-bite", false, 0f);
         }
 
