@@ -3,13 +3,13 @@ using Spine;
 using Spine.Unity;
 using UnityEngine;
 
-namespace Game
-{
+// namespace Game
+// {
     public class demoFigure : MonoBehaviour
     {
         private SkeletonAnimation skeletonAnimation;
 
-        [SerializeField] private bool _flipX = false;
+        [SerializeField] bool _flipX = false;
         public bool flipX
         {
             get
@@ -61,14 +61,12 @@ namespace Game
 
         public void DoJumpAnim()
         {
-            skeletonAnimation.timeScale = 0.5f;
-            skeletonAnimation.AnimationState.AddAnimation(1, "action/move-forward", false, 0f);
+            skeletonAnimation.AnimationState.SetAnimation(0, "action/move-forward", false);
         }
 
         public void DoAtkAnim()
         {
-            skeletonAnimation.timeScale = 0.5f;
-            skeletonAnimation.AnimationState.AddAnimation(1, "attack/melee/mouth-bite", false, 0f);
+            skeletonAnimation.AnimationState.SetAnimation(0, "attack/melee/mouth-bite", false);
         }
 
         private void SpineEndHandler(TrackEntry trackEntry)
@@ -81,4 +79,4 @@ namespace Game
             }
         }
     }
-}
+// }
